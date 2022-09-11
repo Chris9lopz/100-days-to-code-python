@@ -7,5 +7,10 @@ two_digit_number = input("Type a two digit number: ")
 
 ####################################
 #Write your code below this line 👇
+
+# 1. Identificando el typo de dato str que retorna un input se selecciona la posicion de los dos
+#numeros, luego se hace el casteo de cada uno de ellos a tipo integer
 suma_numeros = int(two_digit_number[0]) + int(two_digit_number[1])
+
+# 2. Se realiza la impresion de la variable
 print(str(suma_numeros))
