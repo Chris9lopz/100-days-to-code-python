@@ -31,7 +31,7 @@ bill = 0
 if size == "S":
     bill += 15
     if add_pepperoni == "Y":
-        bill += 3
+        bill += 2
     if extra_cheese == "Y":
         bill += 1
 elif size == "M":
