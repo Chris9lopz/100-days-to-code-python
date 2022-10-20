@@ -40,10 +40,11 @@ while not end_of_game:
         lives -= 1
         if lives < 0:
             end_of_game = True
+            print(f'The word was {chosen_word}')
             print('You lose')
         
 
-    print(blank_list)
+    print(f"{' '.join(blank_list)}\n")
     
     if '_' not in blank_list:
         print('You won')
