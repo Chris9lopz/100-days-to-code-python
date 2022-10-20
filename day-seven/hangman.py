@@ -1,10 +1,15 @@
+# Import modules
 import random
+from hangman_art import logo
+from hangman_art import stages
+from hangman_wordlist import word_list
 
 # Create a hangman game
 
-# Create a list of posible words
-word_list = ["jirafa","elefante","tigre","leon","pulpo","tiburon","dinosaurio"]
+# Call variable logo in hangman_art module
+print(logo)
 
+# Call a list of posible words from hangman_wordlist 
 # Select a random word from the list
 chosen_word = random.choice(word_list)
 
@@ -17,23 +22,32 @@ blank_list = []
 for i in range(len(chosen_word)):
     blank_list.append("_")
 
+end_of_game = False
+lives = 6
+
 # Loop until is not '_' more in the blank_list or blank_list equal to 0
-while '_' in blank_list or len(blank_list) == 0:
+while not end_of_game:
     
     # Ask to the user a letter and convert in a lower letter
     guess = input("Guess a letter: ").lower()
 
-    print(blank_list)
-
     # Modify the value of the blank list if the letter is in chosen_word
-    position = 0
-    for letter in chosen_word:
+    for position in range(len(blank_list)):
+        letter = chosen_word[position]
         if letter == guess:
             blank_list[position] = letter
-            position += 1
-        else:
-            position += 1
+    
+    if guess not in blank_list:
+        print(stages[lives])
+        lives -= 1
+        if lives < 0:
+            end_of_game = True
+            print('You lose')
+        
 
     print(blank_list)
+    
+    if '_' not in blank_list:
+        print('You won')
+        end_of_game = True
 
-print('You won')
