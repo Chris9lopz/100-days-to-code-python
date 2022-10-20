@@ -13,8 +13,6 @@ print(logo)
 # Select a random word from the list
 chosen_word = random.choice(word_list)
 
-print(f'This is a clue {chosen_word}')
-
 # Create a empty list 
 blank_list = []
 
