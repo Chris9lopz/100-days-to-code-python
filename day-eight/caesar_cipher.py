@@ -11,9 +11,9 @@ def caesar(text,shift,direction): # Calling parameters
     empty_text = [] # Create a empty list
     for letter in text:
         word = alphabet.index(letter) # Looking for each letter in alphabet to know it index
-        if direction.lower() == 'encode': # Calling direction = encode
+        if direction == 'encode': # Calling direction = encode
             empty_text.append(alphabet[word + shift]) # Moves 5 positions to the right
-        elif direction.lower() == 'decode': # Calling direction = decode
+        elif direction == 'decode': # Calling direction = decode
             empty_text.append(alphabet[word - shift]) # Moves 5 positions to the left
         else:
             print('Incorrect option, try again') # Requested a new start over if <> direction
