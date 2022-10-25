@@ -7,43 +7,23 @@ direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
 text = input("Type your message:\n").lower()
 shift = int(input("Type the shift number:\n"))
 
-    # Function of encryption
-#def encrypt(text,shift): # Parameters word and shift movement
-#  encrypt_list = [] # Empty list 
-#  for letter in text: 
-#    new_word = alphabet.index(letter) # Searching the letter into the alphabet
-#    encrypt_list.append(alphabet[new_word + shift]) # Add elements and move # of words according to shift
-#  encrypt_word = ''.join(encrypt_list) # List to str
-#  print(f"The encode text is {encrypt_word}") # Output default
-#encrypt(text,shift) # Calling the function
-#
-#def dencrypt(text,shift): # Parameters word and shift movement
-#  encrypt_list = [] # Empty list 
-#  for letter in text: 
-#    new_word = alphabet.index(letter) # Searching the letter into the alphabet
-#    encrypt_list.append(alphabet[new_word - shift]) # Add elements and move # of words according to shift
-#  encrypt_word = ''.join(encrypt_list) # List to str
-#  print(f"The dencode text is {encrypt_word}") # Output default
-#
-#dencrypt(text,shift) # Calling the function
-
-def caesar(text,shift,direction):
-    empty_text = []
+def caesar(text,shift,direction): # Calling parameters
+    empty_text = [] # Create a empty list
     for letter in text:
-        word = alphabet.index(letter)
-        if direction.lower() == 'encode':
-            empty_text.append(alphabet[word + shift])
-        elif direction.lower() == 'decode':
-            empty_text.append(alphabet[word - shift])
+        word = alphabet.index(letter) # Looking for each letter in alphabet to know it index
+        if direction.lower() == 'encode': # Calling direction = encode
+            empty_text.append(alphabet[word + shift]) # Moves 5 positions to the right
+        elif direction.lower() == 'decode': # Calling direction = decode
+            empty_text.append(alphabet[word - shift]) # Moves 5 positions to the left
         else:
-            print('Incorrect option, try again')
+            print('Incorrect option, try again') # Requested a new start over if <> direction
             break
 
-    new_word = ''.join(empty_text)
+    new_word = ''.join(empty_text) # List to Str
 
     if direction.lower() == 'encode':
-        print(f"The encode text is {new_word}")
+        print(f"The encode text is {new_word}") # Output message default
     else:
-        print(f"The dencode text is {new_word}")
+        print(f"The dencode text is {new_word}") # Output message default
 
-caesar(text=text, shift=shift, direction=direction)
+caesar(text=text, shift=shift, direction=direction) # Calling the function
