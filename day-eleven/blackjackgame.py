@@ -1,76 +1,89 @@
+# Declaración de módulos
 from art import logo
 import random
+import os
 
-play_game = True
+def clear():
+    if os.name == "nt":
+        os.system("cls")
+    else:
+        os.system("clear")
+
+def choose_card(): # Función de seleccion de cartas aleatorias
+    return random.choice(cards)
+
+def current_result(): # Función de mostrar resultado actual de la partida
+    user_result = print(f'Your cards: {user_cards} Current score: {total_user_card}')
+    cpu_result = print(f'Computer\'s card: {cpu_cards} Current score: {total_cpu_card}')
+    return user_result, cpu_result
+
+def lose_game(): # Función que indica perdida de juego
+    print('You went over. You lose 😓')
+    play_game = False
+
+def win_game(): # Función que indica perdida de juego
+    print('Opponent went over. You win 😁')
+    play_game = False
+
+play_game = True # Bandera de continuidad del juego
 
 while play_game:
     
-    user_answer = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
+    user_answer = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") # Input usuario
     
     if user_answer == 'y':
+
+        clear()
         
-        print(logo)
+        print(logo) # Llamar logo ASCII
 
-        cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+        cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10] # Declaración de cartas
 
-        user_cards = []
+        # Arreglos vacíos donde se agregará cada maso
+        user_cards = [] 
         cpu_cards = []
 
-        def choose_card():
-            return random.choice(cards)
-
+        # Insercción de primeras cartas para el usuario
         for i in range(2):
             user_cards.append(choose_card())
 
+        # Insercción de primera carta para cpu
         cpu_cards.append(choose_card())
 
+        # Suma de totales actuales para usuario y cpu con cartas actuales
         total_user_card = sum(user_cards)
         total_cpu_card = sum(cpu_cards)
 
-        def current_result():
-            user_result = print(f'Your cards: {user_cards} Current score: {total_user_card}')
-            cpu_result = print(f'Computer\'s card: {cpu_cards} Current score: {total_cpu_card}')
-            return user_result, cpu_result
-
+        # Impresión de resultados actuales
         current_result()
 
-        def lose_game():
-            print('You went over. You lose 😓')
-            play_game = False
-        
-        def win_game():
-            print('Opponent went over. You win 😁')
-            play_game = False
-
-        adding_cards = True
+        adding_cards = True # Bandera de inicio agregar cartas
 
         while adding_cards:
 
-            add_card = input("Type 'y' to get another card, type 'n' to pass: ")
+            add_card = input("Type 'y' to get another card, type 'n' to pass: ") # Input del usuario
             
-            if add_card == 'y':
-                user_cards.append(choose_card())
-                total_user_card = sum(user_cards)
-                current_result()
-                if total_user_card > 21:
-                    lose_game()
-                    adding_cards = False
-            else:
-                cpu_cards.append(choose_card())
-                adding_cards = False
-
-        while total_cpu_card < total_user_card:
-            cpu_cards.append(choose_card())
-            total_cpu_card = sum(cpu_cards)
-
-        if total_cpu_card > total_user_card and total_cpu_card <= 21:
-            current_result()
-            lose_game()
-            play_game = False
-        else:
-            current_result()
-            win_game()
-            play_game = False
+            if add_card == 'y': # En caso de seleccionar 'y'
+                user_cards.append(choose_card()) # Agregar una nueva carta
+                total_user_card = sum(user_cards) # Sumar el total de cartas actual
+                current_result() # Mostrar el resultado actual
+                if total_user_card > 21: # Si agregada la carta es mayor a 21
+                    lose_game() # Indicar perdida de juego
+                    adding_cards = False # Salir del loop de agregar cartas
+            
+            else: # En caso de seleccionar 'n'
+                while total_cpu_card < total_user_card: # Inicio de loop de agregar las cartas cpu si es menor al valor del usuario
+                    cpu_cards.append(choose_card()) # Agregar carta a cpu
+                    total_cpu_card = sum(cpu_cards) # Sumar total de cartas a cpu
+                    if total_cpu_card > total_user_card and total_cpu_card <= 21:
+                        current_result()
+                        lose_game()
+                        adding_cards = False
+                    elif total_cpu_card > 21:
+                        current_result()
+                        win_game()
+                        adding_cards = False
+                            
     else:
         play_game = False
       
