@@ -12,6 +12,14 @@ def clear():
 def choose_card(): # Función de seleccion de cartas aleatorias
     return random.choice(cards)
 
+def calculation_score():
+    if sum(user_cards) == 21 and len(user_cards) == 2:
+        return 21
+    if 11 in user_cards and sum(user_cards) > 21:
+        user_cards.remove(11)
+        user_cards.append(1)
+    return sum(user_cards)
+    
 def current_result(): # Función de mostrar resultado actual de la partida
     user_result = print(f'Your cards: {user_cards} Current score: {total_user_card}')
     cpu_result = print(f'Computer\'s card: {cpu_cards} Current score: {total_cpu_card}')
@@ -43,15 +51,15 @@ while play_game:
         user_cards = [] 
         cpu_cards = []
 
-        # Insercción de primeras cartas para el usuario
+        # Insercción de primeras cartas para el usuario y cpu
         for i in range(2):
             user_cards.append(choose_card())
 
-        # Insercción de primera carta para cpu
+        # Insercción de primeras cartas para el cpu    
         cpu_cards.append(choose_card())
-
+        
         # Suma de totales actuales para usuario y cpu con cartas actuales
-        total_user_card = sum(user_cards)
+        total_user_card = calculation_score()
         total_cpu_card = sum(cpu_cards)
 
         # Impresión de resultados actuales
